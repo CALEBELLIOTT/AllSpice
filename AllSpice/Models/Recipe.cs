@@ -8,7 +8,7 @@ namespace AllSpice.Models
     public string Title { get; set; }
     public string Subtitle { get; set; }
     public string Category { get; set; }
-    public string creatorId { get; set; }
+    public string CreatorId { get; set; }
     public Account Creator { get; set; }
 
   }

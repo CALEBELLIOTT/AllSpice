@@ -1,4 +1,6 @@
+using System.Collections.Generic;
 using System.Data;
+using System.Linq;
 using AllSpice.Models;
 using Dapper;
 
@@ -13,7 +15,7 @@ namespace AllSpice.Repositories
       _db = db;
     }
 
-    internal Recipe createRecipe(Recipe recipeData)
+    internal Recipe CreateRecipe(Recipe recipeData)
     {
       string sql = @"
       INSERT INTO recipes
@@ -25,6 +27,54 @@ namespace AllSpice.Repositories
       int id = _db.ExecuteScalar<int>(sql, recipeData);
       recipeData.Id = id;
       return recipeData;
+    }
+
+    internal Recipe GetById(int id)
+    {
+      string sql = @"
+      SELECT
+        r.*,
+        a.*
+      FROM recipes r
+      JOIN accounts a ON r.creatorId = a.id
+      WHERE r.id = @id
+      ";
+      return _db.Query<Recipe, Account, Recipe>(sql, (recipe, acct) =>
+      {
+        recipe.Creator = acct;
+        return recipe;
+      }, new { id }).FirstOrDefault();
+    }
+
+    internal List<Recipe> GetAll()
+    {
+      string sql = @"
+      SELECT
+        r.*,
+        a.*
+      FROM recipes r
+      JOIN accounts a ON r.creatorId = a.id;
+      ";
+      return _db.Query<Recipe, Account, Recipe>(sql, (recipe, acct) =>
+      {
+        recipe.Creator = acct;
+        return recipe;
+      }).ToList();
+    }
+
+    internal Recipe UpdateRecipe(Recipe RecipeData)
+    {
+      string sql = @"
+      UPDATE recipes
+      SET
+        picture = @Picture,
+        title = @Title,
+        subtitle = @Subtitle,
+        category = @Category
+      WHERE id = @Id
+      ";
+      _db.Execute(sql, RecipeData);
+      return RecipeData;
     }
   }
 }
