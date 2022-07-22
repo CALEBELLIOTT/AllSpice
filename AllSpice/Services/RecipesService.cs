@@ -45,5 +45,15 @@ namespace AllSpice.Services
 
       return _repo.UpdateRecipe(target);
     }
+
+    internal ActionResult<string> DeleteRecipe(int id, string userId)
+    {
+      Recipe original = GetById(id);
+      if (original.CreatorId != userId)
+      {
+        throw new Exception("Not Authorized");
+      }
+      return _repo.DeleteRecipe(id);
+    }
   }
 }

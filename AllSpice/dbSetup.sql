@@ -26,11 +26,14 @@ DROP TABLE recipes;
 CREATE TABLE
     IF NOT EXISTS ingredients(
         id INT NOT NULL AUTO_INCREMENT primary key COMMENT 'primary key',
+        name VARCHAR(225) NOT NULL COMMENT 'ingredient name',
         createdAt DATETIME DEFAULT CURRENT_TIMESTAMP COMMENT 'Time Created',
         updatedAt DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT 'Last Update',
         quantity VARCHAR(225) NOT NULL COMMENT 'ingredient quantity',
         recipeId INT NOT NULL COMMENT 'ingredient recipe'
     ) default charset utf8 COMMENT '';
+
+DROP TABLE ingredients;
 
 CREATE TABLE
     IF NOT EXISTS steps(

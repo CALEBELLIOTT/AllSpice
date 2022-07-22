@@ -82,5 +82,19 @@ namespace AllSpice.Controllers
       }
     }
 
+    [HttpDelete("{id}")]
+    public async Task<ActionResult<string>> DeleteRecipeAsync(int id)
+    {
+      try
+      {
+        Account userInfo = await HttpContext.GetUserInfoAsync<Account>();
+        return _rs.DeleteRecipe(id, userInfo.Id);
+      }
+      catch (System.Exception e)
+      {
+        return BadRequest(e.Message);
+      }
+    }
+
   }
 }

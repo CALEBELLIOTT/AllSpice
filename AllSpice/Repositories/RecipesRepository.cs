@@ -3,6 +3,7 @@ using System.Data;
 using System.Linq;
 using AllSpice.Models;
 using Dapper;
+using Microsoft.AspNetCore.Mvc;
 
 namespace AllSpice.Repositories
 {
@@ -60,6 +61,16 @@ namespace AllSpice.Repositories
         recipe.Creator = acct;
         return recipe;
       }).ToList();
+    }
+
+    internal ActionResult<string> DeleteRecipe(int id)
+    {
+      string sql = @"
+      DELETE FROM recipes WHERE id = @id LIMIT 1
+      ";
+      _db.Execute(sql, new { id });
+      string res = "delorted";
+      return res;
     }
 
     internal Recipe UpdateRecipe(Recipe RecipeData)
