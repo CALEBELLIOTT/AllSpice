@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using AllSpice.Models;
 using AllSpice.Repositories;
 using Microsoft.AspNetCore.Mvc;
@@ -17,7 +19,12 @@ namespace AllSpice.Services
 
     internal Ingredient GetIngredientById(int id)
     {
-      return _repo.GetIngredientById(id);
+      Ingredient target = _repo.GetIngredientById(id);
+      if (target == null)
+      {
+        throw new Exception("invalid Id");
+      }
+      return target;
     }
 
     internal Ingredient CreateIngredient(Ingredient ingredientData, string userId)
@@ -39,6 +46,11 @@ namespace AllSpice.Services
         throw new System.Exception("Can't delete ingredients on recipes that don't belong to you.");
       }
       return _repo.DeleteIngredient(ingredientId);
+    }
+
+    internal List<Ingredient> GetRecipeIngredients(int id)
+    {
+      return _repo.GetRecipeIngredients(id);
     }
   }
 }

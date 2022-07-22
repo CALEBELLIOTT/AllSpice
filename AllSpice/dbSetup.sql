@@ -51,5 +51,9 @@ CREATE TABLE
         createdAt DATETIME DEFAULT CURRENT_TIMESTAMP COMMENT 'Time Created',
         updatedAt DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT 'Last Update',
         accountId VARCHAR(225) NOT NULL COMMENT 'favorite account id',
-        recipeId INT NOT NULL COMMENT 'favorite recipe id'
+        recipeId INT NOT NULL COMMENT 'favorite recipe id',
+        FOREIGN KEY (accountId) REFERENCES accounts(id) ON DELETE CASCADE,
+        FOREIGN KEY (recipeId) REFERENCES recipes(id) ON DELETE CASCADE
     ) default charset utf8 COMMENT '';
+
+DROP TABLE favorites;

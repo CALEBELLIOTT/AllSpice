@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using AllSpice.Models;
@@ -44,6 +45,14 @@ namespace AllSpice.Repositories
       ";
       _db.Execute(sql, new { ingredientId });
       return ("delorted");
+    }
+
+    internal List<Ingredient> GetRecipeIngredients(int id)
+    {
+      string sql = @"
+      SELECT * FROM ingredients WHERE recipeId = @id
+      ";
+      return _db.Query<Ingredient>(sql, new { id }).ToList();
     }
   }
 }

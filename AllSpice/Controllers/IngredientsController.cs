@@ -56,7 +56,7 @@ namespace AllSpice.Controllers
       try
       {
         Account userInfo = await HttpContext.GetUserInfoAsync<Account>();
-        return _is.DeleteIngredient(id, userInfo.Id);
+        return Ok(_is.DeleteIngredient(id, userInfo.Id));
       }
       catch (System.Exception e)
       {

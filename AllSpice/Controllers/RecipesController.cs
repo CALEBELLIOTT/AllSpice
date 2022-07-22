@@ -13,10 +13,14 @@ namespace AllSpice.Controllers
   public class RecipesController : ControllerBase
   {
     private readonly RecipesService _rs;
+    private readonly IngredientsService _is;
+    private readonly StepsService _ss;
 
-    public RecipesController(RecipesService rs)
+    public RecipesController(RecipesService rs, IngredientsService @is, StepsService ss)
     {
       _rs = rs;
+      _is = @is;
+      _ss = ss;
     }
 
     [HttpPost]
@@ -59,6 +63,44 @@ namespace AllSpice.Controllers
       {
         Recipe recipe = _rs.GetById(id);
         return recipe;
+      }
+      catch (System.Exception e)
+      {
+        return BadRequest(e.Message);
+      }
+    }
+
+    [HttpGet("{id}/ingredients")]
+    public ActionResult<List<Ingredient>> GetIngredients(int id)
+    {
+      try
+      {
+        Recipe targetRecipe = _rs.GetById(id);
+        if (targetRecipe == null)
+        {
+          throw new System.Exception("invalid recipe Id");
+        }
+        List<Ingredient> ingredients = _is.GetRecipeIngredients(id);
+        return Ok(ingredients);
+      }
+      catch (System.Exception e)
+      {
+        return BadRequest(e.Message);
+      }
+    }
+
+    [HttpGet("{id}/steps")]
+    public ActionResult<List<Step>> GetSteps(int id)
+    {
+      try
+      {
+        Recipe targetRecipe = _rs.GetById(id);
+        if (targetRecipe == null)
+        {
+          throw new System.Exception("invalid recipe Id");
+        }
+        List<Step> steps = _ss.GetRecipeSteps(id);
+        return Ok(steps);
       }
       catch (System.Exception e)
       {

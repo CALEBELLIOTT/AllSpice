@@ -28,7 +28,12 @@ namespace AllSpice.Services
 
     internal Recipe GetById(int id)
     {
-      return _repo.GetById(id);
+      Recipe target = _repo.GetById(id);
+      if (target == null)
+      {
+        throw new Exception("invalid recipe id");
+      }
+      return target;
     }
 
     internal ActionResult<Recipe> UpdateRecipe(int recipeId, Recipe recipeData)
