@@ -7,11 +7,15 @@
 </template>
 
 <script>
-import { computed } from 'vue'
+import { computed, onMounted } from 'vue'
 import { AppState } from './AppState'
+import { recipesService } from "./services/RecipesService"
 export default {
   name: 'App',
   setup() {
+    onMounted(async () => {
+      await recipesService.getAll()
+    })
     return {
       appState: computed(() => AppState)
     }
