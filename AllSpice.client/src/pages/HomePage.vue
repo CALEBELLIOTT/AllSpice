@@ -1,10 +1,22 @@
 <template>
-  <div class="home flex-grow-1 d-flex flex-column align-items-center justify-content-center">
-    <div class="home-card p-5 bg-white rounded elevation-3">
-      <img src="https://bcw.blob.core.windows.net/public/img/8600856373152463" alt="CodeWorks Logo" class="rounded-circle">
-      <h1 class="my-5 bg-dark text-white p-3 rounded text-center">
-        Vue 3 Starter
-      </h1>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12 m-0 p-0">
+        <div class="hero-banner">
+          <div class="row">
+            <div class="col-12 d-flex justify-content-end">
+              <login></login>
+            </div>
+            <div class="col-12 d-flex justify-content-end">
+              <div class="text-container">
+                <h1 class="mb-3">AllSpice</h1>
+                <h5>We Connect You With Recipes</h5>
+                <h5 class="mx-3">So You Connect With Loved Ones</h5>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -16,21 +28,14 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.home{
-  display: grid;
-  height: 80vh;
-  place-content: center;
-  text-align: center;
-  user-select: none;
-  .home-card{
-    width: 50vw;
-    > img{
-      height: 200px;
-      max-width: 200px;
-      width: 100%;
-      object-fit: contain;
-      object-position: center;
-    }
-  }
+.hero-banner {
+  background-image: url(../assets/img/brooke-lark-08bOYnH_r_E-unsplash.jpg);
+  height: 50vh;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.text-container {
+  width: 50vw;
 }
 </style>
