@@ -22,7 +22,7 @@ namespace AllSpice.Controllers
 
     [HttpPost]
     [Authorize]
-    internal async Task<ActionResult<Favorite>> CreateFavoriteAsync([FromBody] Favorite favoriteData)
+    public async Task<ActionResult<Favorite>> CreateFavoriteAsync([FromBody] Favorite favoriteData)
     {
       try
       {
