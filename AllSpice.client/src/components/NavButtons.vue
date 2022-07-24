@@ -31,7 +31,8 @@ export default {
 .nav-container {
   width: 30vw;
   // border: 2px solid #c6383a;
-  border: 2px solid #2aaf0c;
+  border: 2px solid #527360;
+  ;
   border-radius: 2px;
   transform: translateY(-1.5rem);
 }

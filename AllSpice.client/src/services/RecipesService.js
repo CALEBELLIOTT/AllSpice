@@ -6,6 +6,7 @@ class RecipesService {
   async getAll() {
     const res = await api.get('api/recipes')
     AppState.allRecipes = res.data
+    console.log(AppState.allRecipes);
   }
 }
 
