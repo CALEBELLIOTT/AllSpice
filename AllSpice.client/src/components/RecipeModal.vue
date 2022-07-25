@@ -58,6 +58,11 @@
                   </div>
                 </div>
               </div>
+              <div class="col-12">
+                <div class="d-flex justify-content-center">
+                  <h1><i class=" like-btn mdi mdi-heart text-secondary" @click="toggleFavorite"></i></h1>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -118,7 +123,22 @@ export default {
 
 .recipe-card {
   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  max-height: 40vh;
+  overflow-y: scroll;
 }
 
 .form-input {}
+
+.like-btn {
+  font-size: 4rem;
+}
+
+.like-btn:hover {
+  text-shadow: 0 0 3px #527360;
+  cursor: pointer;
+}
+
+.like-btn.liked {
+  color: #c6383a;
+}
 </style>
