@@ -2,7 +2,8 @@
   <div class="row">
     <div class="col-12 p-2">
       <div class="recipe-card border border-secondary d-flex flex-column justify-content-between"
-        :style="`background-image: url(${recipe.picture});`">
+        :style="`background-image: url(${recipe.picture});`" @click="launchModal(recipe.id)" data-bs-toggle="modal"
+        data-bs-target="#recipeModal">
         <div class="d-flex justify-content-between">
           <p class="category-text p-1">{{ recipe.category }}</p>
           <p class="category-text p-1 text-secondary like-btn"><i class="mdi mdi-heart"></i></p>
@@ -18,10 +19,24 @@
 
 
 <script>
+import { stepsService } from "../services/StepsService"
+import { ingredientsService } from "../services/IngredientsService"
+import { recipesService } from "../services/RecipesService"
+import { AppState } from "../AppState"
+
 export default {
   props: { recipe: { type: Object, required: true } },
   setup() {
-    return {}
+    return {
+      async launchModal(id) {
+        AppState.activeRecipe = {}
+        AppState.activeRecipeIngredients = []
+        AppState.activeRecipeSteps = []
+        await recipesService.getRecipeById(id)
+        await stepsService.getRecipeSteps(id)
+        await ingredientsService.getRecipeIngredients(id)
+      }
+    }
   }
 }
 </script>
@@ -29,12 +44,16 @@ export default {
 
 <style lang="scss" scoped>
 .recipe-card {
-  height: 15rem;
-  width: 15rem;
+  height: 20rem;
+  width: 20rem;
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
   border-radius: 2px;
+}
+
+.recipe-card:hover {
+  cursor: pointer;
 }
 
 .category-text {

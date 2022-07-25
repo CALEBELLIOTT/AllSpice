@@ -15,7 +15,7 @@
         <Recipe :recipe="r"></Recipe>
       </div>
     </div>
-
+    <RecipeModal></RecipeModal>
 
   </div>
 </template>
