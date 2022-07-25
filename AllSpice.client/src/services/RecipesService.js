@@ -14,6 +14,13 @@ class RecipesService {
     console.log(res.data);
     AppState.activeRecipe = res.data
   }
+
+  async createRecipe(recipeData) {
+    recipeData.creatorId = AppState.account.id
+    const res = await api.post('api/recipes', recipeData)
+    AppState.allRecipes.push(res.data)
+    console.log(res.data);
+  }
 }
 
 export const recipesService = new RecipesService()

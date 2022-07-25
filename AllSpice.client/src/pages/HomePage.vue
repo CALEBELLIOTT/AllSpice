@@ -17,6 +17,9 @@
     </div>
     <RecipeModal></RecipeModal>
 
+
+    <CreateRecipeModal></CreateRecipeModal>
+
   </div>
 </template>
 

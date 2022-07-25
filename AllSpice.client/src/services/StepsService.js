@@ -8,6 +8,13 @@ class StepsService {
     console.log(res.data);
     AppState.activeRecipeSteps = res.data
   }
+
+  async createStep(data, recipeId) {
+    console.log(recipeId);
+    data.recipeId = recipeId
+    const res = await api.post('api/steps', data)
+    AppState.activeRecipeSteps.push(res.data)
+  }
 }
 
 export const stepsService = new StepsService

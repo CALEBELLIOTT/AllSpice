@@ -6,7 +6,9 @@
         data-bs-target="#recipeModal">
         <div class="d-flex justify-content-between">
           <p class="category-text p-1">{{ recipe.category }}</p>
-          <p class="category-text p-1 text-secondary like-btn"><i class="mdi mdi-heart"></i></p>
+          <p class=" p-1 text-secondary">
+          <h2><i class="mdi mdi-heart"></i></h2>
+          </p>
         </div>
         <div>
           <p class="category-text m-0">{{ recipe.title }}</p>
@@ -44,8 +46,8 @@ export default {
 
 <style lang="scss" scoped>
 .recipe-card {
-  height: 20rem;
-  width: 20rem;
+  height: 24rem;
+  width: 24rem;
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
