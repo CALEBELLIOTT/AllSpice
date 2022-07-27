@@ -46,7 +46,7 @@ namespace AllSpice.Repositories
         r.*,
         f.id AS FavoriteId
       FROM favorites f
-      JOIN recipes r ON r.creatorId = f.accountId
+      JOIN recipes r ON r.id = f.recipeId
       WHERE f.accountId = @accountId;
       ";
       return _db.Query<FavoriteRecipeViewModel>(sql, new { accountId }).ToList();

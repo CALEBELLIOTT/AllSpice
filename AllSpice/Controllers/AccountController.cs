@@ -15,11 +15,13 @@ namespace AllSpice.Controllers
   {
     private readonly AccountService _accountService;
     private readonly FavoritesService _fs;
+    private readonly RecipesService _rs;
 
-    public AccountController(AccountService accountService, FavoritesService fs)
+    public AccountController(AccountService accountService, FavoritesService fs, RecipesService rs)
     {
       _accountService = accountService;
       _fs = fs;
+      _rs = rs;
     }
 
     [HttpGet]
@@ -45,6 +47,21 @@ namespace AllSpice.Controllers
       {
         Account userInfo = await HttpContext.GetUserInfoAsync<Account>();
         return _fs.GetFavoritedRecipes(userInfo.Id);
+      }
+      catch (System.Exception e)
+      {
+        return BadRequest(e.Message);
+      }
+    }
+
+    [HttpGet("recipes")]
+    public async Task<ActionResult<List<Recipe>>> GetAccountRecipesAsync()
+    {
+      try
+      {
+        Account userInfo = await HttpContext.GetUserInfoAsync<Account>();
+        List<Recipe> recipes = _rs.GetAccountRecipes(userInfo.Id);
+        return recipes;
       }
       catch (System.Exception e)
       {

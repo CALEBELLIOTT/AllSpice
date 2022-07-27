@@ -60,5 +60,11 @@ namespace AllSpice.Services
       }
       return _repo.DeleteRecipe(id);
     }
+
+    internal List<Recipe> GetAccountRecipes(string userId)
+    {
+      List<Recipe> recipes = _repo.GetAccountRecipes(userId);
+      return recipes;
+    }
   }
 }

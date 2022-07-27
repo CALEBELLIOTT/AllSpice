@@ -59,8 +59,11 @@
                 </div>
               </div>
               <div class="col-12">
-                <div class="d-flex justify-content-center">
-                  <h1><i class=" like-btn mdi mdi-heart text-secondary" @click="toggleFavorite"></i></h1>
+                <div class="d-flex flex-column align-items-center">
+                  <h1><i class=" like-btn mdi mdi-heart text-secondary m-0" :id="`like-btn-${random}`"
+                      @click="toggleFavorite()"></i>
+                  </h1>
+                  <p class="text-muted">Favorite this recipe!</p>
                 </div>
               </div>
             </div>
@@ -86,6 +89,8 @@ export default {
     let account = computed(() => AppState.account)
     let stepData = ref({})
     let ingredientData = ref({})
+    let favorites = computed(() => AppState.accountFavorites)
+    let random = Math.random(10000);
 
     return {
       recipe,
@@ -94,6 +99,8 @@ export default {
       stepData,
       ingredientData,
       account,
+      favorites,
+      random,
       async createStep() {
         console.log(stepData.value);
         await stepsService.createStep(stepData.value, AppState.activeRecipe.id)
@@ -107,6 +114,26 @@ export default {
         ingredientData.name = ""
         ingredientData.quantity = ""
         document.getElementById("ingredientForm").reset()
+      },
+      async toggleFavorite() {
+        let target = document.getElementById(`like-btn-${random}`)
+        console.log(target);
+        let liked = false
+        target.classList.forEach(c => {
+          console.log(c);
+          if (c == "text-primary") {
+            liked = true
+          }
+        })
+        if (liked) {
+          target.classList.remove("text-primary")
+          target.classList.add("text-secondary")
+        }
+        if (!liked) {
+          console.log("not liked ");
+          target.classList.remove("text-secondary")
+          target.classList.add("text-primary")
+        }
       }
     }
   }
@@ -116,7 +143,7 @@ export default {
 
 <style lang="scss" scoped>
 .recipe-img {
-  min-height: 60vh;
+  min-height: 70vh;
   background-size: cover;
   background-position: center;
 }

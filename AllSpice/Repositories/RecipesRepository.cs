@@ -73,6 +73,15 @@ namespace AllSpice.Repositories
       return res;
     }
 
+    internal List<Recipe> GetAccountRecipes(string UserId)
+    {
+      string sql = @"
+      SELECT * FROM recipes WHERE creatorId = @UserId
+      ";
+      List<Recipe> recipes = _db.Query<Recipe>(sql, new { UserId }).ToList();
+      return recipes;
+    }
+
     internal Recipe UpdateRecipe(Recipe RecipeData)
     {
       string sql = @"

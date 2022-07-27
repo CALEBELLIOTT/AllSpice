@@ -9,6 +9,10 @@ class RecipesService {
     console.log(AppState.allRecipes);
   }
 
+  async getCreatedRecipes() {
+
+  }
+
   async getRecipeById(id) {
     const res = await api.get('api/recipes/' + id)
     console.log(res.data);
@@ -21,6 +25,8 @@ class RecipesService {
     AppState.allRecipes.push(res.data)
     console.log(res.data);
   }
+
+
 }
 
 export const recipesService = new RecipesService()
