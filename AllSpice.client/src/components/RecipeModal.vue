@@ -15,7 +15,7 @@
               <div class="recipe-img rounded-start" :style="`background-image: url(${recipe.picture});`">
               </div>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-6 right-container d-flex flex-column justify-content-between">
               <div class="row">
                 <div class="col-md-12">
                   <h1 class="text-primary m-0">{{ recipe.title }}</h1>
@@ -104,9 +104,9 @@ export default {
       async createStep() {
         console.log(stepData.value);
         await stepsService.createStep(stepData.value, AppState.activeRecipe.id)
-        document.getElementById("stepForm").reset()
         stepData.position = 0
         stepData.body = ""
+        document.getElementById("stepForm").reset()
       },
       async createIngredient() {
         console.log(ingredientData.value);
@@ -167,5 +167,9 @@ export default {
 
 .like-btn.liked {
   color: #c6383a;
+}
+
+.right-container {
+  min-height: 70vh;
 }
 </style>
